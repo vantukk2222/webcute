@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import coupleme from "../assets/image/coupleme.jpg";
 // In the MessageCard.js file, update the CardContainer styled component:
 
 const CardContainer = styled(motion.div)`
@@ -310,118 +310,130 @@ const MessageCard = ({ marginBottom }) => {
     });
 
     return (
-        <>
-            <CardContainer
-                marginBottom={marginBottom}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+      <>
+        <CardContainer
+          marginBottom={marginBottom}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <AnimatePresence mode="wait">
+            <MessageWrapper
+              key={currentMessage}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.5 }}
             >
-                <AnimatePresence mode="wait">
-                    <MessageWrapper
-                        key={currentMessage}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <Message
-                            initial={{ opacity: 0 }}
-                            animate={{
-                                opacity: 1,
-                                transition: {
-                                    delay: 0.2,
-                                    staggerChildren: 0.1
-                                }
-                            }}
-                        >
-                            {messages[currentMessage].msg}
-                        </Message>
-                    </MessageWrapper>
-                </AnimatePresence>
+              <Message
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    delay: 0.2,
+                    staggerChildren: 0.1
+                  }
+                }}
+              >
+                {messages[currentMessage].msg}
+              </Message>
+            </MessageWrapper>
+          </AnimatePresence>
 
-                <ButtonContainer>
-                    <Button
-                        onClick={nextMessage}
-                        whileHover={{ scale: 1.05, boxShadow: '0 6px 20px rgba(255, 105, 180, 0.6)' }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        {messages[currentMessage].title}
-                        <HeartIcon
-                            animate={{
-                                scale: [1, 1.3, 1],
-                                rotate: [0, 10, -10, 0]
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                repeatType: "loop"
-                            }}
-                        >
-                            <CustomHeart color="#fff" />
-                        </HeartIcon>
-                    </Button>
-                </ButtonContainer>
+          <ButtonContainer>
+            <Button
+              onClick={nextMessage}
+              whileHover={{ scale: 1.05, boxShadow: '0 6px 20px rgba(255, 105, 180, 0.6)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {messages[currentMessage].title}
+              <HeartIcon
+                animate={{
+                  scale: [1, 1.3, 1],
+                  rotate: [0, 10, -10, 0]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop"
+                }}
+              >
+                <CustomHeart color="#fff" />
+              </HeartIcon>
+            </Button>
+          </ButtonContainer>
 
-                <ProgressBar>
-                    <Progress progress={progress} />
-                </ProgressBar>
+          <ProgressBar>
+            <Progress progress={progress} />
+          </ProgressBar>
 
-                {floatingHearts.map(heart => (
-                    <FloatingHeart
-                        key={heart.id}
-                        size={heart.size}
-                        style={{ left: `${heart.x}%`, top: `${heart.y}%` }}
-                        initial={{ opacity: 0, y: 0, rotate: heart.rotation }}
-                        animate={{
-                            opacity: [0, 1, 0],
-                            y: -100,
-                            rotate: heart.rotation
-                        }}
-                        transition={{ duration: 2, ease: "easeOut" }}
-                    >
-                        <CustomHeart color={heart.color || '#ff69b4'} />
-                    </FloatingHeart>
-                ))}
-            </CardContainer>
+          {floatingHearts.map(heart => (
+            <FloatingHeart
+              key={heart.id}
+              size={heart.size}
+              style={{ left: `${heart.x}%`, top: `${heart.y}%` }}
+              initial={{ opacity: 0, y: 0, rotate: heart.rotation }}
+              animate={{
+                opacity: [0, 1, 0],
+                y: -100,
+                rotate: heart.rotation
+              }}
+              transition={{ duration: 2, ease: "easeOut" }}
+            >
+              <CustomHeart color={heart.color || '#ff69b4'} />
+            </FloatingHeart>
+          ))}
+        </CardContainer>
 
-            {showFinalEffect && (
-                <FullscreenOverlay
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    {heartRows}
+        {showFinalEffect && (
+          <FullscreenOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {heartRows}
 
-                    <MessageDecoration>
-                       
-                    </MessageDecoration>
+            <MessageDecoration>
+               
+            </MessageDecoration>
 
-                    <FinalMessage
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 1.5, duration: 0.8, type: "spring" }}
-                    >
-                        <motion.div
-                            animate={{
-                                textShadow: [
-                                    "0 0 20px #ff69b4, 0 0 30px #ff69b4",
-                                    "0 0 40px #ff69b4, 0 0 60px #ff69b4",
-                                    "0 0 20px #ff69b4, 0 0 30px #ff69b4"
-                                ]
-                            }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                repeatType: "reverse"
-                            }}
-                        >
-                            I Love You
-                        </motion.div>
-                    </FinalMessage>
-                </FullscreenOverlay>
-            )}
-        </>
+            <FinalMessage
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 2.5, duration: 0.8, type: "spring" }}
+            >
+              <motion.div
+                animate={{
+                  textShadow: [
+                    "0 0 20px #ff69b4, 0 0 30px #ff69b4",
+                    "0 0 40px #ff69b4, 0 0 60px #ff69b4",
+                    "0 0 20px #ff69b4, 0 0 30px #ff69b4"
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                I Love You
+              </motion.div>
+            </FinalMessage>
+
+            <AnimatePresence>
+              {showFinalEffect && (
+                <motion.img
+                  src={coupleme}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 3, duration: 1 }}
+                  style={{ position: 'absolute', zIndex: 1002, maxWidth: '60%', maxHeight: '80%' }}
+                />
+              )}
+            </AnimatePresence>
+          </FullscreenOverlay>
+        )}
+      </>
     );
 };
 
