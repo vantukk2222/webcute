@@ -2,7 +2,6 @@
 
 A beautiful, interactive web application created as a special gift for Women's Day.
 
-## 💖 Created by [caigicungdev](https://github.com/caigicungdev)
 
 ## 🌟 Features
 
@@ -24,7 +23,7 @@ A beautiful, interactive web application created as a special gift for Women's D
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/caigicungdev/cute_web.git
+   git clone https://github.com/vantukk2222/webcute.git
 ```
 2. Navigate to the project directory
 
@@ -56,4 +55,3 @@ You can customize the messages by editing the messages array in the MessageCard.
 ## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Made with ❤️ by caigicungdev# cute_web
